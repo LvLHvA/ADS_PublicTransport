@@ -1,4 +1,8 @@
-package PACKAGE_NAME;
+import org.junit.Test;
 
 public class BuilderTest {
+    @Test
+    void addLineTest(){
+
+    }
 }
