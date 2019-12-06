@@ -29,7 +29,7 @@ public class TransportGraph {
     public void addVertex(Station vertex) {
         stationList.add(vertex);
         stationIndices.put(vertex, stationList.size()-1);
-        numberOfStations++;
+        //numberOfStations++;
     }
 
 
