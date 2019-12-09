@@ -61,7 +61,6 @@ public class TransportGraph {
         addEdge(fromIndex, toIndex);
         connections[fromIndex][toIndex] = connection;
         connections[toIndex][fromIndex] = connection;
-        numberOfConnections++;
     }
 
     public List<Integer> getAdjacentVertices(int index) {
@@ -132,7 +131,7 @@ public class TransportGraph {
             Line line = new Line(lineDefinition[1], lineDefinition[0]);
 
             //add all stations to line
-            for (int i = 2; i <= lineDefinition.length - 2; i++) {
+            for (int i = 2; i <= lineDefinition.length - 1; i++) {
                 Station station = new Station(lineDefinition[i]);
                 line.addStation(station);
             }
@@ -183,14 +182,9 @@ public class TransportGraph {
                     if(previousStation == null){
                         previousStation = station;
                     } else {
-
-                        Connection previousAndNext = new Connection(previousStation, station);
-                        Connection nextAndPrevious = new Connection(station, previousStation);
-
-                        connectionSet.add(previousAndNext);
-                        connectionSet.add(nextAndPrevious);
-
-
+                        Connection connection = new Connection(previousStation, station);
+                        connectionSet.add(connection);
+                        previousStation = station;
                     }
                 }
             }
