@@ -1,26 +1,26 @@
 package graphalgorithms;
 
+import model.Line;
 import model.Station;
 import model.TransportGraph;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Abstract class that contains methods and attributes shared by the DepthFirstPath en BreadthFirstPath classes
  */
 public abstract class AbstractPathSearch {
 
-    protected boolean[] marked;
-    protected int[] edgeTo;
+    protected boolean[] marked;                     // Used for marking visited vertices
+    protected int[] edgeTo;                         // To keep track of how edges are connected
     protected int transfers = 0;
-    protected List<Station> nodesVisited;
+    protected List<Station> nodesVisited;           //Is build in the search method
     protected List<Station> nodesInPath;
     protected LinkedList<Integer> verticesInPath;
     protected TransportGraph graph;
     protected final int startIndex;
     protected final int endIndex;
+
 
 
     public AbstractPathSearch(TransportGraph graph, String start, String end) {
@@ -30,6 +30,7 @@ public abstract class AbstractPathSearch {
         nodesVisited = new ArrayList<>();
         marked = new boolean[graph.getNumberOfStations()];
         edgeTo = new int[graph.getNumberOfStations()];
+        nodesInPath = new ArrayList<>();
     }
 
     public abstract void search();
@@ -48,14 +49,36 @@ public abstract class AbstractPathSearch {
      * First the LinkedList verticesInPath, containing the indexes of the stations, should be build, used as a stack
      * Then the list nodesInPath containing the actual stations is build.
      * Also the number of transfers is counted.
-     * @param vertex The station (vertex) as an index
+     * @param endVertex The station (vertex) as an index
      */
-    public void pathTo(int vertex) {
+    public void pathTo(int endVertex) {
         //Builds path from startIndex --> vertex
+        //Is called only once after search is finished.
 
-        //TODO: Find vertices in path to vertex
 
-        // TODO
+
+
+        if(!hasPathTo(endVertex)) return;               // No path possible so returning
+        nodesInPath.add(station);                       // Adding current vertex to nodes in path.
+
+        if(endVertex != startIndex) {
+            pathTo(edgeTo[endVertex]);                  // Calling pathTo again with the node connected
+                                                        // to the current one
+        } else {
+            Collections.reverse(nodesInPath);           // Because this method 'walks back' the list needs
+                                                        // to be inverted
+        }
+
+
+
+        //TODO: From book -> not working correctly -> dont know why
+//        for(int i = endVertex; i != startIndex; i = edgeTo[i]) {
+//            System.out.println(graph.getStation(endVertex));
+//            nodesInPath.add(graph.getStation(endVertex));
+//        }
+//        nodesInPath.add(graph.getStation(startIndex));
+
+        // TODO Count transfers...
     }
 
     /**
