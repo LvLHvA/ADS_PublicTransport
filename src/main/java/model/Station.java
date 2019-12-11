@@ -27,6 +27,7 @@ public class Station {
 
     /**
      * Method to find the lines two stations have in common, the intersection of their sets of lines.
+     *
      * @param station Station to find common lines with
      * @return The set of lines the stations have in common
      */
@@ -39,6 +40,7 @@ public class Station {
 
     /**
      * Method to get one line that two stations have in common
+     *
      * @param station
      * @return
      */
@@ -61,9 +63,13 @@ public class Station {
         return lines.contains(line);
     }
 
+
     @Override
-    public boolean equals(Object other) {
-        return this.stationName.equals(((Station) other).stationName);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        return this.stationName.equals(((Station) o).stationName);
     }
 
     @Override

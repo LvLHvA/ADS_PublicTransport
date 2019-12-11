@@ -7,7 +7,7 @@ public class TransportGraph {
     private int numberOfStations;
     private int numberOfConnections;
     private List<Station> stationList;
-    private Map<Station, Integer> stationIndices;
+    private Map<String, Integer> stationIndices;
     private List<Integer>[] adjacencyLists;
     private Connection[][] connections;
 
@@ -28,8 +28,7 @@ public class TransportGraph {
      */
     public void addVertex(Station vertex) {
         stationList.add(vertex);
-        stationIndices.put(vertex, stationList.size()-1);
-        //numberOfStations++;
+        stationIndices.put(vertex.getStationName(), stationList.size()-1);
     }
 
 
@@ -55,9 +54,9 @@ public class TransportGraph {
      * @param connection The edge as a connection between stations
      */
     public void addEdge(Connection connection) {
-        // TODO
-        int fromIndex = stationIndices.get(connection.getFrom());
-        int toIndex = stationIndices.get(connection.getTo());
+
+        int fromIndex = stationIndices.get(connection.getFrom().getStationName());
+        int toIndex = stationIndices.get(connection.getTo().getStationName());
         addEdge(fromIndex, toIndex);
         connections[fromIndex][toIndex] = connection;
         connections[toIndex][fromIndex] = connection;
@@ -71,7 +70,9 @@ public class TransportGraph {
         return connections[from][to];
     }
 
-
+    public int getIndexOfStationByName(String stationName) {
+        return stationIndices.get(stationName);
+    }
 
     public Station getStation(int index) {
         return stationList.get(index);
@@ -81,6 +82,8 @@ public class TransportGraph {
         return numberOfStations;
     }
 
+
+
     public List<Station> getStationList() {
         return stationList;
     }
@@ -88,6 +91,7 @@ public class TransportGraph {
     public int getNumberEdges() {
         return numberOfConnections;
     }
+
 
     @Override
     public String toString() {
@@ -148,9 +152,7 @@ public class TransportGraph {
          */
         public Builder buildStationSet() {
             for(Line line: lineList){
-                for(Station station: line.getStationsOnLine()){
-                    stationSet.add(station);
-                }
+                stationSet.addAll(line.getStationsOnLine());
             }
             return this;
         }

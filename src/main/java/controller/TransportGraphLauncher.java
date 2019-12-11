@@ -1,5 +1,7 @@
 package controller;
 
+import model.TransportGraph;
+
 public class TransportGraphLauncher {
 
     public static void main(String[] args) {
@@ -9,19 +11,28 @@ public class TransportGraphLauncher {
         String[] yellowLine = {"yellow", "bus", "A", "E", "H", "D", "G", "A"};
 
         // TODO Use the builder to build the graph from the String array.
+        TransportGraph transportGraph = new TransportGraph.Builder()
+                .addLine(redLine)
+                .addLine(blueLine)
+                .addLine(greenLine)
+                .addLine(yellowLine)
+                .buildStationSet()
+                .addLinesToStations()
+                .buildConnections()
+                .build();
 
 //        Uncomment to test the builder:
-//        System.out.println(transportGraph);
+        System.out.println(transportGraph);
 
 //        Uncommented to test the DepthFirstPath algorithm
-        /*DepthFirstPath dfpTest = new DepthFirstPath(transportGraph, 4, 9);
+        /*DepthFirstPath dfpTest = new DepthFirstPath(transportGraph, "E", "J");
         dfpTest.search();
         System.out.println(dfpTest);
         dfpTest.printNodesInVisitedOrder();
         System.out.println();*/
 
 //        Uncommented to test the BreadthFirstPath algorithm
-        /*BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraph, 4, 9);
+        /*BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraph, "E", "J");
         bfsTest.search();
         System.out.println(bfsTest);
         bfsTest.printNodesInVisitedOrder();*/

@@ -23,9 +23,9 @@ public abstract class AbstractPathSearch {
     protected final int endIndex;
 
 
-    public AbstractPathSearch(TransportGraph graph, int start, int end) {
-        startIndex = start;
-        endIndex = end;
+    public AbstractPathSearch(TransportGraph graph, String start, String end) {
+        startIndex = graph.getIndexOfStationByName(start);
+        endIndex = graph.getIndexOfStationByName(end);
         this.graph = graph;
         nodesVisited = new ArrayList<>();
         marked = new boolean[graph.getNumberOfStations()];
@@ -51,6 +51,10 @@ public abstract class AbstractPathSearch {
      * @param vertex The station (vertex) as an index
      */
     public void pathTo(int vertex) {
+        //Builds path from startIndex --> vertex
+
+        //TODO: Find vertices in path to vertex
+
         // TODO
     }
 
