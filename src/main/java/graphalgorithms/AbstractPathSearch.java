@@ -55,11 +55,8 @@ public abstract class AbstractPathSearch {
         //Builds path from startIndex --> vertex
         //Is called only once after search is finished.
 
-
-
-
         if(!hasPathTo(endVertex)) return;               // No path possible so returning
-        nodesInPath.add(station);                       // Adding current vertex to nodes in path.
+        nodesInPath.add(graph.getStation(endVertex));   // Adding current vertex to nodes in path.
 
         if(endVertex != startIndex) {
             pathTo(edgeTo[endVertex]);                  // Calling pathTo again with the node connected
