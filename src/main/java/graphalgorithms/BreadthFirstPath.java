@@ -16,28 +16,29 @@ public class BreadthFirstPath extends AbstractPathSearch {
 
     @Override
     public void search() {
-        searchRecursive(startIndex);
-        System.out.println(Arrays.toString(edgeTo));
-        pathTo(endIndex);
-
-//        Arrays.stream(edgeTo).map(e -> graph.getStation())
-    }
-
-    public void searchRecursive(int source) {
         Queue<Integer> queue = new PriorityQueue<>();
-        marked[source] = true;                          // Mark the source as we are at it currently
-        queue.add(source);                              // Put it onto queue
+        marked[startIndex] = true;                          // Mark the source as we are at it currently
+        queue.add(startIndex);                              // Put it onto queue
 
-        while(!queue.isEmpty()) {
+        whileloop:                                          //Label
+        while (!queue.isEmpty()) {
             int vertex = queue.remove();
             for (int adjacentVertex : graph.getAdjacentVertices(vertex)) {
-                if(!marked[adjacentVertex]) {           // For every node we have not been yet
+                if (!marked[adjacentVertex]) {           // For every node we have not been yet
+                    nodesVisited.add(graph.getStation(adjacentVertex));
                     edgeTo[adjacentVertex] = vertex;    // Save last edge on shortest path
                     marked[adjacentVertex] = true;      // Mark it because it is known and added to shortest path.
+
+
                     queue.add(adjacentVertex);
+                    if(adjacentVertex == endIndex) {
+                        break whileloop;                    //Break to label
+                    }
                 }
             }
         }
+
+        pathTo(endIndex);
 
     }
 }
