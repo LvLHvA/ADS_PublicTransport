@@ -17,6 +17,8 @@ public class BreadthFirstPath extends AbstractPathSearch {
     @Override
     public void search() {
         Queue<Integer> queue = new PriorityQueue<>();
+
+        nodesVisited.add(graph.getStation(startIndex));
         marked[startIndex] = true;                          // Mark the source as we are at it currently
         queue.add(startIndex);                              // Put it onto queue
 

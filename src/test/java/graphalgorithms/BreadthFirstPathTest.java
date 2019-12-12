@@ -37,8 +37,8 @@ public class BreadthFirstPathTest {
         String path = "[A, G, J]";
         assertTrue(bf.toString().contains(path));
 
-        String order = "[B, E, G, C, F, D, I, H, J]";
-        assertTrue(bf.nodesVisited.toString().contains(order));
+        String order = "[A, B, E, G, C, F, D, I, H, J]";
+        assertEquals(bf.nodesVisited.toString(), order);
 
         assertEquals(bf.transfers, 1);
     }
@@ -51,12 +51,13 @@ public class BreadthFirstPathTest {
         assertFalse(bf.nodesInPath.size() > 2);
 
         String path = "[A, B]";
+        System.out.println(bf.nodesInPath);
         assertEquals(bf.nodesInPath.toString(), path);
 
 
-        String order = "[B]";
+        String order = "[A, B]";
         assertEquals(bf.nodesVisited.toString(), order);
-        assertEquals(1, bf.nodesVisited.size());
+        assertEquals(2, bf.nodesVisited.size());
 
         assertEquals(bf.transfers, 0);
     }
