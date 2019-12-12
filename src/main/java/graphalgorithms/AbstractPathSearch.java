@@ -94,7 +94,8 @@ public abstract class AbstractPathSearch {
      * If to consecutive connections are on different lines there was a transfer.
      */
     public void countTransfers() {
-        // TODO
+        // Implemented in pathTo
+        //TODO: Ask Mr.Tromp
     }
 
 
