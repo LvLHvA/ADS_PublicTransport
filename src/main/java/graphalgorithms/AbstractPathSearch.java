@@ -85,7 +85,6 @@ public abstract class AbstractPathSearch {
         nodesInPath.add(graph.getStation(startIndex));    //Adding source station to path
         Collections.reverse(nodesInPath);                 //Reversing because the loops adds in reverse order.
 
-        // TODO Count transfers...
 
     }
 

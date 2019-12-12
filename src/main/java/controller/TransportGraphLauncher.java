@@ -27,7 +27,7 @@ public class TransportGraphLauncher {
         //System.out.println(transportGraph);
 
 //        Uncommented to test the DepthFirstPath algorithm
-        BreadthFirstPath dfpTest = new BreadthFirstPath(transportGraph, "A", "B");
+        BreadthFirstPath dfpTest = new BreadthFirstPath(transportGraph, "A", "J");
         dfpTest.search();
         System.out.println(dfpTest);
         dfpTest.printNodesInVisitedOrder();
