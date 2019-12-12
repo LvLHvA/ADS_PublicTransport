@@ -56,26 +56,37 @@ public abstract class AbstractPathSearch {
         //Is called only once after search is finished.
 
         if(!hasPathTo(endVertex)) return;               // No path possible so returning
-        nodesInPath.add(graph.getStation(endVertex));   // Adding current vertex to nodes in path.
 
-        if(endVertex != startIndex) {
-            pathTo(edgeTo[endVertex]);                  // Calling pathTo again with the node connected
-                                                        // to the current one
-        } else {
-            Collections.reverse(nodesInPath);           // Because this method 'walks back' the list needs
-                                                        // to be inverted
+        Station oldStation = graph.getStation(endVertex);
+        Line currentLine = null;
+        for(int i = endVertex; i != startIndex; i = edgeTo[i]) {
+            Station currentStation = graph.getStation(i);
+            Station nextStation = graph.getStation(edgeTo[i]);
+
+            nodesInPath.add(currentStation);        //Adding connected station to path
+
+            //Setting currentLine when on first iteration
+            if(currentLine == null) {
+                currentLine = currentStation.getCommonLine(nextStation);
+                continue;
+            }
+
+            //Cheking if next station is on current line
+            boolean sameLine  = currentLine.getStationsOnLine().contains(nextStation);
+
+            if(!sameLine) {
+                //Adding 1 to transfers and setting currentLine to the next Line
+                transfers++;
+                currentLine = currentStation.getCommonLine(nextStation);
+            }
+
         }
 
-
-
-        //TODO: From book -> not working correctly -> dont know why
-//        for(int i = endVertex; i != startIndex; i = edgeTo[i]) {
-//            System.out.println(graph.getStation(endVertex));
-//            nodesInPath.add(graph.getStation(endVertex));
-//        }
-//        nodesInPath.add(graph.getStation(startIndex));
+        nodesInPath.add(graph.getStation(startIndex));    //Adding source station to path
+        Collections.reverse(nodesInPath);                 //Reversing because the loops adds in reverse order.
 
         // TODO Count transfers...
+
     }
 
     /**
