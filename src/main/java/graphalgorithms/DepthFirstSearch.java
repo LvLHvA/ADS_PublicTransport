@@ -15,14 +15,25 @@ public class DepthFirstSearch extends AbstractPathSearch {
         pathTo(endIndex);
     }
 
-    public void searchRecursive(int v) {
+    private void searchRecursive(int v) {
+
+        if(v == endIndex) {
+            return;
+        }
         marked[v] = true;
         for (int adjacentVertex : graph.getAdjacentVertices(v)) {
 
-            if(!marked[adjacentVertex]) {
+            if (!marked[adjacentVertex]) {
                 nodesVisited.add(graph.getStation(adjacentVertex));
                 edgeTo[adjacentVertex] = v;
+                marked[adjacentVertex] = true;
+
+
+                if (adjacentVertex == endIndex) {
+                    return;
+                }
                 searchRecursive(adjacentVertex);
+
             }
         }
 

@@ -1,64 +1,64 @@
 package graphalgorithms;
 
-import model.TransportGraph;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class BreadthFirstPathTest {
+public class BreadthFirstPathTest extends SearchSetup {
 
-    TransportGraph transportGraph;
-
-
-    String[] redLine = {"red", "metro", "A", "B", "C", "D"};
-    String[] blueLine = {"blue", "metro", "E", "B", "F", "G"};
-    String[] greenLine = {"green", "metro", "H", "I", "C", "G", "J"};
-    String[] yellowLine = {"yellow", "bus", "A", "E", "H", "D", "G", "A"};
-
-    @Before
-    public void setUp() {
-        transportGraph = new TransportGraph.Builder()
-                .addLine(redLine)
-                .addLine(blueLine)
-                .addLine(greenLine)
-                .addLine(yellowLine)
-                .buildStationSet()
-                .addLinesToStations()
-                .buildConnections()
-                .build();
-    }
+    BreadthFirstPath bfs;
 
     @Test
     public void testAtoJ() {
-        BreadthFirstPath bf = new BreadthFirstPath(transportGraph, "A", "J");
-        bf.search();
+        bfs = new BreadthFirstPath(transportGraph, "A", "J");
+        bfs.search();
 
         String path = "[A, G, J]";
-        assertTrue(bf.toString().contains(path));
+        assertTrue(bfs.toString().contains(path));
 
         String order = "[A, B, E, G, C, F, D, I, H, J]";
-        assertEquals(bf.nodesVisited.toString(), order);
+        assertEquals(bfs.nodesVisited.toString(), order);
 
-        assertEquals(bf.transfers, 1);
+        assertEquals(bfs.transfers, 1);
+
+        System.out.println(bfs);
+        bfs.printNodesInVisitedOrder();
+        System.out.println();
     }
 
     @Test
     public void testAtoB() {
-        BreadthFirstPath bf = new BreadthFirstPath(transportGraph, "A", "B");
-        bf.search();
+        bfs = new BreadthFirstPath(transportGraph, "A", "B");
+        bfs.search();
 
-        assertFalse(bf.nodesInPath.size() > 2);
+        assertFalse(bfs.nodesInPath.size() > 2);
 
         String path = "[A, B]";
-        System.out.println(bf.nodesInPath);
-        assertEquals(bf.nodesInPath.toString(), path);
+        assertEquals(path, bfs.nodesInPath.toString());
 
 
         String order = "[A, B]";
-        assertEquals(bf.nodesVisited.toString(), order);
-        assertEquals(2, bf.nodesVisited.size());
+        assertEquals(order, bfs.nodesVisited.toString());
+        assertEquals(2, bfs.nodesVisited.size());
 
-        assertEquals(bf.transfers, 0);
+        assertEquals(0, bfs.transfers);
+
+        System.out.println(bfs);
+        bfs.printNodesInVisitedOrder();
+        System.out.println();
+    }
+    
+    @Test
+    public void testAtoA() {
+        bfs = new BreadthFirstPath(transportGraph, "A" , "A");
+        bfs.search();
+
+        assertEquals(1, bfs.nodesVisited.size()); //Because you check the firstIndex
+        assertEquals(0, bfs.nodesInPath.size());
+        assertEquals(0, bfs.transfers);
+
+        System.out.println(bfs);
+        bfs.printNodesInVisitedOrder();
+        System.out.println();
     }
 }

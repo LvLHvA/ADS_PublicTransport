@@ -25,6 +25,11 @@ public class BreadthFirstPath extends AbstractPathSearch {
         whileloop:                                          //Label
         while (!queue.isEmpty()) {
             int vertex = queue.remove();
+            //Check if startIndex is equal to endIndex
+            if(vertex == endIndex) {
+                return;
+            }
+
             for (int adjacentVertex : graph.getAdjacentVertices(vertex)) {
                 if (!marked[adjacentVertex]) {           // For every node we have not been yet
                     nodesVisited.add(graph.getStation(adjacentVertex));
