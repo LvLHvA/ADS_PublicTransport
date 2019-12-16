@@ -95,8 +95,11 @@ public abstract class AbstractPathSearch {
      */
     public void countTransfers() {
         // Implemented in pathTo
-        //TODO: Ask Mr.Tromp
+        //Explained in report
     }
+
+
+
 
 
     /**
@@ -105,7 +108,7 @@ public abstract class AbstractPathSearch {
     public void printNodesInVisitedOrder() {
         System.out.print("Nodes in visited order: ");
         for (Station vertex : nodesVisited) {
-            System.out.print(vertex.getStationName() + " ");
+            System.out.print(String.format("(%s)-", vertex.toString()));
         }
         System.out.println();
     }

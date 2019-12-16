@@ -60,6 +60,6 @@ public class Connection {
 
     @Override
     public String toString() {
-        return String.format("from %s to %s on line %s", getFrom().getStationName(), getTo().getStationName(), line);
+        return String.format("from %s to %s on line %s. Weight: %.2f", getFrom().getStationName(), getTo().getStationName(), line, weight);
     }
 }
