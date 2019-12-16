@@ -200,7 +200,7 @@ public class TransportGraph {
             return this;
         }
 
-        public Builder addWeights(String[] lineDefinition, double weights[]) throws ClassNotFoundException {
+        public Builder addWeight(String[] lineDefinition, double[] weights) throws ClassNotFoundException {
 
             Line line = lineList.stream()
                     .filter(line1 -> line1.getName().equals(lineDefinition[0]))

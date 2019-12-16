@@ -1,9 +1,7 @@
 package graphalgorithms;
 
-import model.IndexMinPQ;
 import model.TransportGraph;
 
-import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -22,11 +20,12 @@ public class BreadthFirstPath extends AbstractPathSearch {
         marked[startIndex] = true;                          // Mark the source as we are at it currently
         queue.add(startIndex);                              // Put it onto queue
 
-        whileloop:                                          //Label
+        whileloop:
+        //Label
         while (!queue.isEmpty()) {
             int vertex = queue.remove();
             //Check if startIndex is equal to endIndex
-            if(vertex == endIndex) {
+            if (vertex == endIndex) {
                 return;
             }
 
@@ -38,7 +37,7 @@ public class BreadthFirstPath extends AbstractPathSearch {
 
 
                     queue.add(adjacentVertex);
-                    if(adjacentVertex == endIndex) {
+                    if (adjacentVertex == endIndex) {
                         break whileloop;                    //Break to label
                     }
                 }

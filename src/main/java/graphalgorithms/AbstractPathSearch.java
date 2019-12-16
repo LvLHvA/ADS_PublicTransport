@@ -4,7 +4,10 @@ import model.Line;
 import model.Station;
 import model.TransportGraph;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Abstract class that contains methods and attributes shared by the DepthFirstPath en BreadthFirstPath classes
@@ -20,7 +23,6 @@ public abstract class AbstractPathSearch {
     protected TransportGraph graph;
     protected final int startIndex;
     protected final int endIndex;
-
 
 
     public AbstractPathSearch(TransportGraph graph, String start, String end) {
@@ -49,32 +51,32 @@ public abstract class AbstractPathSearch {
      * First the LinkedList verticesInPath, containing the indexes of the stations, should be build, used as a stack
      * Then the list nodesInPath containing the actual stations is build.
      * Also the number of transfers is counted.
+     *
      * @param endVertex The station (vertex) as an index
      */
     public void pathTo(int endVertex) {
         //Builds path from startIndex --> vertex
         //Is called only once after search is finished.
 
-        if(!hasPathTo(endVertex)) return;               // No path possible so returning
+        if (!hasPathTo(endVertex)) return;               // No path possible so returning
 
-        Station oldStation = graph.getStation(endVertex);
         Line currentLine = null;
-        for(int i = endVertex; i != startIndex; i = edgeTo[i]) {
+        for (int i = endVertex; i != startIndex; i = edgeTo[i]) {
             Station currentStation = graph.getStation(i);
             Station nextStation = graph.getStation(edgeTo[i]);
 
             nodesInPath.add(currentStation);        //Adding connected station to path
 
             //Setting currentLine when on first iteration
-            if(currentLine == null) {
+            if (currentLine == null) {
                 currentLine = currentStation.getCommonLine(nextStation);
                 continue;
             }
 
-            //Cheking if next station is on current line
-            boolean sameLine  = currentLine.getStationsOnLine().contains(nextStation);
+            //Checking if next station is on current line
+            boolean sameLine = currentLine.getStationsOnLine().contains(nextStation);
 
-            if(!sameLine) {
+            if (!sameLine) {
                 //Adding 1 to transfers and setting currentLine to the next Line
                 transfers++;
                 currentLine = currentStation.getCommonLine(nextStation);
@@ -97,9 +99,6 @@ public abstract class AbstractPathSearch {
         // Implemented in pathTo
         //Explained in report
     }
-
-
-
 
 
     /**

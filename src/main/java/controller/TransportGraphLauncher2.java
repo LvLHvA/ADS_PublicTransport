@@ -12,11 +12,11 @@ public class TransportGraphLauncher2 {
         String[] yellowLine = {"yellow", "bus", "Ymeerdijk", "Haven", "Nobelplein", "Violetplantsoen", "Oostvaarders", "Grote Sluis"};
 
 
-        double redWeights[] = new double[]{4.5, 4.7, 6.1, 3.5, 5.4, 5.6};
-        double blueWeights[] = new double[]{6.0, 5.3, 5.1, 3.3};
-        double purpleWeights[] = new double[]{6.2, 5.2, 3.8, 3.6};
-        double greenWeights[] = new double[]{5.0, 3.7, 6.9, 3.9, 3.4};
-        double yellowWeights[] = new double[]{19, 37, 25, 22, 28, 26};
+        double[] redWeights = new double[]{4.5, 4.7, 6.1, 3.5, 5.4, 5.6};
+        double[] blueWeights = new double[]{6.0, 5.3, 5.1, 3.3};
+        double[] purpleWeights = new double[]{6.2, 5.2, 3.8, 3.6};
+        double[] greenWeights = new double[]{5.0, 3.7, 6.9, 3.9, 3.4};
+        double[] yellowWeights = new double[]{19, 37, 25, 22, 28, 26};
 
 
         TransportGraph transportGraph = new TransportGraph.Builder()
@@ -28,11 +28,11 @@ public class TransportGraphLauncher2 {
                 .buildStationSet()
                 .addLinesToStations()
                 .buildConnections()
-                .addWeights(redLine, redWeights)
-                .addWeights(blueLine, blueWeights)
-                .addWeights(purpleLine, purpleWeights)
-                .addWeights(greenLine, greenWeights)
-                .addWeights(yellowLine, yellowWeights)
+                .addWeight(redLine, redWeights)
+                .addWeight(blueLine, blueWeights)
+                .addWeight(purpleLine, purpleWeights)
+                .addWeight(greenLine, greenWeights)
+                .addWeight(yellowLine, yellowWeights)
                 .build();
 
 //        System.out.println(transportGraph);

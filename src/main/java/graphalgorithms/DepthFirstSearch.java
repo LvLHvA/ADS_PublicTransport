@@ -17,7 +17,7 @@ public class DepthFirstSearch extends AbstractPathSearch {
 
     private void searchRecursive(int v) {
 
-        if(v == endIndex) {
+        if (v == endIndex) {
             return;
         }
         marked[v] = true;
