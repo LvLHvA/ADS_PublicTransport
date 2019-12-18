@@ -216,7 +216,7 @@ public class TransportGraph {
                     oldStation = station;
                     continue;
                 }
-
+                
 //                Because the variables used in lambda need to be final
 //                Making new variable
                 Station finalOldStation = oldStation;
@@ -228,12 +228,9 @@ public class TransportGraph {
 
                 currentConnection.setWeight(weights[weightIndex++]);
 
-                System.out.println(currentConnection);
-                //TODO: When line is in loop, the last connection is not being made.
                 oldStation = station;
             }
 
-            System.out.println();
             return this;
         }
 

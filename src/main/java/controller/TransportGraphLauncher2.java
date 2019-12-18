@@ -9,7 +9,7 @@ public class TransportGraphLauncher2 {
         String[] blueLine = {"blue", "metro", "Trojelaan", "Coltranee Cirkel", "Meridiaan", "Robijnpark", "Violetplantsoen"};
         String[] purpleLine = {"purple", "metro", "Grote Sluis", "Grootzeil", "Coltrane Cirkel", "Centrum", "Swingstraat"};
         String[] greenLine = {"green", "metro", "Ymeerdijk", "Trojelaan", "Steigerplein", "Bachgracht", "Swingstraat", "Nobelplein"};
-        String[] yellowLine = {"yellow", "bus", "Ymeerdijk", "Haven", "Nobelplein", "Violetplantsoen", "Oostvaarders", "Grote Sluis"};
+        String[] yellowLine = {"yellow", "bus", "Ymeerdijk", "Haven", "Nobelplein", "Violetplantsoen", "Oostvaarders", "Grote Sluis", "Ymeerdijk"};
 
 
         double[] redWeights = new double[]{4.5, 4.7, 6.1, 3.5, 5.4, 5.6};
@@ -34,6 +34,7 @@ public class TransportGraphLauncher2 {
                 .addWeight(greenLine, greenWeights)
                 .addWeight(yellowLine, yellowWeights)
                 .build();
+
 
 //        System.out.println(transportGraph);
 
