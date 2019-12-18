@@ -1,5 +1,6 @@
 package controller;
 
+import graphalgorithms.DijkstraShortestPath;
 import model.TransportGraph;
 
 public class TransportGraphLauncher2 {
@@ -38,6 +39,12 @@ public class TransportGraphLauncher2 {
 
 //        System.out.println(transportGraph);
 
+
+        DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph, "Haven", "Oostvaarders");
+        dijk.search();
+        System.out.println(dijk);
+        dijk.printNodesInVisitedOrder();
+        System.out.println();
 
 //        BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraph, "Haven", "Oostvaarders");
 //        bfsTest.search();

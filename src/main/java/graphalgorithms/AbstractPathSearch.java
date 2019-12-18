@@ -1,9 +1,11 @@
 package graphalgorithms;
 
+import model.Connection;
 import model.Line;
 import model.Station;
 import model.TransportGraph;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -98,6 +100,18 @@ public abstract class AbstractPathSearch {
     public void countTransfers() {
         // Implemented in pathTo
         //Explained in report
+    }
+
+
+    public List<Connection> getConnectionsForStation(int fromStationIndex) {
+
+        List<Connection> list = new ArrayList();
+
+        for (Integer adjacentVertex : graph.getAdjacentVertices(fromStationIndex)) {
+            list.add(graph.getConnection(fromStationIndex, adjacentVertex));
+        }
+
+        return list;
     }
 
 

@@ -32,32 +32,32 @@ public class TransportGraphLauncher {
         System.out.println(transportGraph);
 
         //Uncommented to test the DepthSerach algorithm
-        DepthFirstSearch bfsTest = new DepthFirstSearch(transportGraph, "E", "J");
-        bfsTest.search();
-        System.out.println(bfsTest);
-        bfsTest.printNodesInVisitedOrder();
-        System.out.println();
+//        DepthFirstSearch bfsTest = new DepthFirstSearch(transportGraph, "E", "J");
+//        bfsTest.search();
+//        System.out.println(bfsTest);
+//        bfsTest.printNodesInVisitedOrder();
+//        System.out.println();
 
         // TODO: 16-12-19 A.5
 
 
-        TreeMap<Station, List<Station>> visited = new TreeMap();
-
-
-        for (Station station : transportGraph.getStationList()) {
-            visited.putIfAbsent(station, new ArrayList());
-            for (Station station1 : transportGraph.getStationList()) {
-                if (station != station1 && !visited.get(station1).contains(station)) {
-                    visited.get(station).add(station1);
-
-                    bfsTest = new DepthFirstSearch(transportGraph, station.getStationName(), station1.getStationName());
-                    bfsTest.search();
-                    bfsTest.pathTo(transportGraph.getIndexOfStationByName(station1.getStationName()));
-                    System.out.println(bfsTest);
-
-                }
-            }
-        }
+//        TreeMap<Station, List<Station>> visited = new TreeMap();
+//
+//
+//        for (Station station : transportGraph.getStationList()) {
+//            visited.putIfAbsent(station, new ArrayList());
+//            for (Station station1 : transportGraph.getStationList()) {
+//                if (station != station1 && !visited.get(station1).contains(station)) {
+//                    visited.get(station).add(station1);
+//
+//                    bfsTest = new DepthFirstSearch(transportGraph, station.getStationName(), station1.getStationName());
+//                    bfsTest.search();
+//                    bfsTest.pathTo(transportGraph.getIndexOfStationByName(station1.getStationName()));
+//                    System.out.println(bfsTest);
+//
+//                }
+//            }
+//        }
 
 
 //        Uncommented to test the BreathFirst algorithm

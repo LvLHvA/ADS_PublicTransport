@@ -94,6 +94,10 @@ public class TransportGraph {
     }
 
 
+    public Connection[][] getConnections() {
+        return connections;
+    }
+
     @Override
     public String toString() {
         StringBuilder resultString = new StringBuilder();
@@ -140,7 +144,6 @@ public class TransportGraph {
             for (int i = 2; i <= lineDefinition.length - 1; i++) {
                 Station station = new Station(lineDefinition[i]);
                 line.addStation(station);
-
             }
 
             lineList.add(line);
@@ -216,7 +219,7 @@ public class TransportGraph {
                     oldStation = station;
                     continue;
                 }
-                
+
 //                Because the variables used in lambda need to be final
 //                Making new variable
                 Station finalOldStation = oldStation;
