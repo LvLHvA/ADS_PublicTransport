@@ -142,6 +142,7 @@ public class TransportGraph {
 
             //add all stations to line
             for (int i = 2; i <= lineDefinition.length - 1; i++) {
+                //TODO Check if station already exists
                 Station station = new Station(lineDefinition[i]);
                 line.addStation(station);
             }

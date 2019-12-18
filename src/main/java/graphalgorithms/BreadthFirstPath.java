@@ -2,6 +2,7 @@ package graphalgorithms;
 
 import model.TransportGraph;
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -14,7 +15,7 @@ public class BreadthFirstPath extends AbstractPathSearch {
 
     @Override
     public void search() {
-        Queue<Integer> queue = new PriorityQueue<>();
+        Queue<Integer> queue = new LinkedList<>();
 
         nodesVisited.add(graph.getStation(startIndex));
         marked[startIndex] = true;                          // Mark the source as we are at it currently
