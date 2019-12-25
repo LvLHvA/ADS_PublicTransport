@@ -1,11 +1,10 @@
 package controller;
 
-import graphalgorithms.DijkstraShortestPath;
 import model.TransportGraph;
 
 public class TransportGraphLauncher2 {
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws Exception {
         String[] redLine = {"red", "metro", "Haven", "Marken", "Steigerplein", "Centrum", "Meridiaan", "Dukdalf", "Oostvaarders"};
         String[] blueLine = {"blue", "metro", "Trojelaan", "Coltrane Cirkel", "Meridiaan", "Robijnpark", "Violetplantsoen"};
         String[] purpleLine = {"purple", "metro", "Grote Sluis", "Grootzeil", "Coltrane Cirkel", "Centrum", "Swingstraat"};
@@ -18,6 +17,14 @@ public class TransportGraphLauncher2 {
         double[] purpleWeights = new double[]{6.2, 5.2, 3.8, 3.6};
         double[] greenWeights = new double[]{5.0, 3.7, 6.9, 3.9, 3.4};
         double[] yellowWeights = new double[]{19, 37, 25, 22, 28, 26};
+
+
+        // A lot of options for optimizations
+        int[] redLocations = new int[]{14, 1, 12, 3, 10, 5, 8, 8, 6, 9, 3, 10, 0, 11};
+        int[] blueLocations = new int[]{9, 3, 7, 6, 6, 9, 3, 3, 5, 14};
+        int[] purpleLocations = new int[]{2, 3, 4, 6, 7, 6, 8, 8, 10, 9};
+        int[] greenLocations = new int[]{9, 0, 9, 3, 10, 5, 10, 9, 11, 11, 12, 13};
+        int[] yellowLocations = new int[]{9, 0, 14, 1, 12, 13, 5, 14, 0, 11, 2, 3, 9, 0};
 
 
         TransportGraph transportGraph = new TransportGraph.Builder()
@@ -34,25 +41,32 @@ public class TransportGraphLauncher2 {
                 .addWeight(purpleLine, purpleWeights)
                 .addWeight(greenLine, greenWeights)
                 .addWeight(yellowLine, yellowWeights)
+                .addLocationToStationsForLine(redLocations, "red")
+                .addLocationToStationsForLine(blueLocations, "blue")
+                .addLocationToStationsForLine(purpleLocations, "purple")
+                .addLocationToStationsForLine(greenLocations, "green")
+                .addLocationToStationsForLine(yellowLocations, "yellow")
                 .build();
 
 
-//        System.out.println(transportGraph);
+        System.out.println(transportGraph);
 
 
-        DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph, "Haven", "Coltrane Cirkel");
-        dijk.search();
-        System.out.println(dijk);
-        dijk.printNodesInVisitedOrder();
-        System.out.println();
-
-//        BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraph, "Haven", "Oostvaarders");
+//        DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph, "Haven", "Coltrane Cirkel");
+//        dijk.search();
+//        System.out.println(dijk);
+//        dijk.printNodesInVisitedOrder();
+//        System.out.println();
+//
+//        BreadthFirstPath bfsTest = new BreadthFirstPath(transportGraph, "Haven", "Coltrane Cirkel");
 //        bfsTest.search();
 //        System.out.println(bfsTest);
 //        bfsTest.printNodesInVisitedOrder();
 //        System.out.println();
 //
-//        DepthFirstSearch dfsTest = new DepthFirstSearch(transportGraph, "Haven", "Oostvaarders");
+//
+//        //Something doesnt work here...
+//        DepthFirstSearch dfsTest = new DepthFirstSearch(transportGraph, "Haven", "Coltrane Cirkel");
 //        bfsTest.search();
 //        System.out.println(dfsTest);
 //        bfsTest.printNodesInVisitedOrder();

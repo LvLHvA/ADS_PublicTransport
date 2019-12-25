@@ -6,10 +6,8 @@ package model;
  * @author koenlippe
  */
 public class Location {
-
-
+    
     protected static final double TRAVEL_TIME_PER_SQUARE = 1.5;
-
 
     private int x;
     private int y;
@@ -23,5 +21,8 @@ public class Location {
         return Math.sqrt(Math.pow(to.x - from.x, 2) + Math.pow(to.y - from.y, 2)) * TRAVEL_TIME_PER_SQUARE;
     }
 
-
+    @Override
+    public String toString() {
+        return String.format("(%d,%d)", x, y);
+    }
 }

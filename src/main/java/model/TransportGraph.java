@@ -103,7 +103,7 @@ public class TransportGraph {
         StringBuilder resultString = new StringBuilder();
         resultString.append(String.format("Graph with %d vertices and %d edges: \n", numberOfStations, numberOfConnections));
         for (int indexVertex = 0; indexVertex < numberOfStations; indexVertex++) {
-            resultString.append(stationList.get(indexVertex) + ": ");
+            resultString.append(stationList.get(indexVertex) + " " + stationList.get(indexVertex).getLocation() + ": ");
             int loopsize = adjacencyLists[indexVertex].size() - 1;
             for (int indexAdjacent = 0; indexAdjacent < loopsize; indexAdjacent++) {
                 resultString.append("(" + stationList.get(adjacencyLists[indexVertex].get(indexAdjacent)).getStationName() + ")-");
@@ -234,6 +234,30 @@ public class TransportGraph {
                 currentConnection.setWeight(weights[weightIndex++]);
 
                 oldStation = station;
+            }
+
+            return this;
+        }
+
+        public Builder addLocationToStationsForLine(int[] locations, String lineName) throws Exception {
+            Line line = lineList.stream()
+                    .filter(l -> l.getName().equals(lineName))
+                    .findFirst()
+                    .orElseThrow(() -> new Exception("Line not found!"));
+
+            if (locations.length != line.getStationsOnLine().size()*2) {
+                throw new Exception(
+                        String.format("Stationlist size: %d -> array size: %d for line %s",
+                                line.getStationsOnLine().size(),
+                                locations.length,
+                                lineName));
+            }
+
+            int counter = 0;
+            for (int i = 0; i < line.getStationsOnLine().size(); i++) {
+                Location location = new Location(locations[counter++], locations[counter++]);
+                line.getStationsOnLine().get(i).setLocation(location);
+
             }
 
             return this;
