@@ -5,8 +5,10 @@ import model.Line;
 import model.Station;
 import model.TransportGraph;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Abstract class that contains methods and attributes shared by the DepthFirstPath en BreadthFirstPath classes

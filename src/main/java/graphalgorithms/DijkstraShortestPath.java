@@ -12,7 +12,7 @@ public class DijkstraShortestPath extends AbstractPathSearch {
     private Line[] edgeToType;
     private IndexMinPQ<Double> queue;
 
-    // Minutes
+    // In Minutes
     private final int METRO_METRO_PENALTY = 6;
     private final int METRO_BUS_PENALTY = 3;
 
@@ -81,7 +81,7 @@ public class DijkstraShortestPath extends AbstractPathSearch {
         Line nextLine = graph.getConnection(from, to).getLine();
 
         //Returning 0 if no previous line
-        if(previousLine == null) {
+        if (previousLine == null) {
             return 0;
         }
 
