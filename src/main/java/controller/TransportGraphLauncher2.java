@@ -1,6 +1,14 @@
 package controller;
 
+import graphalgorithms.A_Star;
+import graphalgorithms.DijkstraShortestPath;
+import model.Station;
 import model.TransportGraph;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 public class TransportGraphLauncher2 {
 
@@ -49,7 +57,7 @@ public class TransportGraphLauncher2 {
                 .build();
 
 
-        System.out.println(transportGraph);
+//        System.out.println(transportGraph);
 
 
 //        DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph, "Haven", "Coltrane Cirkel");
@@ -71,5 +79,57 @@ public class TransportGraphLauncher2 {
 //        System.out.println(dfsTest);
 //        bfsTest.printNodesInVisitedOrder();
 //        System.out.println();
+
+
+        // Overview //
+        List<DijkstraShortestPath> dijkstra = new ArrayList<>();
+
+        for (Station station1 : transportGraph.getStationList()) {
+            for (Station station2 : transportGraph.getStationList()) {
+                if(station1.equals(station2)) {
+                    continue;
+                }
+                DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph,
+                        station1.getStationName(),
+                        station2.getStationName());
+                dijk.search();
+                dijkstra.add(dijk);
+
+            }
+        }
+
+        Collections.sort(dijkstra);
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(dijkstra.get(i));
+        }
+
+        System.out.println();
+
+        List<A_Star> a_star = new ArrayList<>();
+
+        for (Station station1 : transportGraph.getStationList()) {
+            for (Station station2 : transportGraph.getStationList()) {
+                if(station1.equals(station2)) {
+                    continue;
+                }
+                A_Star aStar = new A_Star(transportGraph,
+                        station1.getStationName(),
+                        station2.getStationName());
+                aStar.search();
+                a_star.add(aStar);
+
+            }
+        }
+
+        Collections.sort(a_star);
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(a_star.get(i));
+        }
+
+
+
+
     }
 }

@@ -5,7 +5,7 @@ import model.IndexMinPQ;
 import model.Line;
 import model.TransportGraph;
 
-public class DijkstraShortestPath extends AbstractPathSearch {
+public class DijkstraShortestPath extends AbstractPathSearch implements Comparable<DijkstraShortestPath> {
 
 
     private double[] distTo;
@@ -103,4 +103,8 @@ public class DijkstraShortestPath extends AbstractPathSearch {
     }
 
 
+    @Override
+    public int compareTo(DijkstraShortestPath other) {
+        return Integer.compare(this.nodesInPath.size() , other.nodesInPath.size());
+    }
 }
