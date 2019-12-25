@@ -35,25 +35,23 @@ public class DijkstraShortestPath extends AbstractPathSearch {
             for (Connection connection : getConnectionsForStation(v)) {
 
                 //To make sure we get the correct adjacent station instead of the station itself.
-                int selfIndex;
                 int adjacentIndex;
                 if (connection.getTo().equals(graph.getStation(v))) {
                     adjacentIndex = graph.getIndexOfStationByName(connection.getFrom().getStationName());
-                    selfIndex = graph.getIndexOfStationByName(connection.getTo().getStationName());
                 } else {
                     adjacentIndex = graph.getIndexOfStationByName(connection.getTo().getStationName());
-                    selfIndex = graph.getIndexOfStationByName(connection.getFrom().getStationName());
                 }
 
                 //Adding adjacentIndex to visited nodes
                 nodesVisited.add(graph.getStation(adjacentIndex));
 
 
+
                 if (distTo[adjacentIndex] > (distTo[v] + connection.getWeight())) {
                     //Setting new dist value
                     distTo[adjacentIndex] = (distTo[v] + connection.getWeight());
                     //Setting self to be the new fasest route.
-                    edgeTo[adjacentIndex] = selfIndex;
+                    edgeTo[adjacentIndex] = v;
 
                     if (queue.contains(adjacentIndex)) {
                         queue.changeKey(adjacentIndex, distTo[adjacentIndex]);
