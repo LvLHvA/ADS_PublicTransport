@@ -196,6 +196,7 @@ public class TransportGraph {
                     } else {
 
                         Connection connection = new Connection(previousStation, station);
+                        connection.setLine(line);
                         connectionSet.add(connection);
                         previousStation = station;
                     }

@@ -27,6 +27,10 @@ public class Line {
         return name;
     }
 
+    public String getType() {
+        return type;
+    }
+
     @Override
     public boolean equals(Object other) {
         return this.name.equals(((Line) other).name);

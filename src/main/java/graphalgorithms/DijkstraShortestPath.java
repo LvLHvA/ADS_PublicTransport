@@ -2,19 +2,26 @@ package graphalgorithms;
 
 import model.Connection;
 import model.IndexMinPQ;
-import model.Station;
+import model.Line;
 import model.TransportGraph;
 
 public class DijkstraShortestPath extends AbstractPathSearch {
 
 
     private double[] distTo;
+    private Line[] edgeToType;
     private IndexMinPQ<Double> queue;
+
+    // Minutes
+    private final int METRO_METRO_PENALTY = 6;
+    private final int METRO_BUS_PENALTY = 3;
+
 
     public DijkstraShortestPath(TransportGraph graph, String start, String end) {
         super(graph, start, end);
         queue = new IndexMinPQ<>(graph.getNumberOfStations());
         distTo = new double[graph.getNumberOfStations()];
+        edgeToType = new Line[graph.getNumberOfStations()];
 
         for (int i = 0; i < graph.getNumberOfStations(); i++) {
             distTo[i] = Double.POSITIVE_INFINITY;
@@ -42,12 +49,13 @@ public class DijkstraShortestPath extends AbstractPathSearch {
                     adjacentIndex = graph.getIndexOfStationByName(connection.getTo().getStationName());
                 }
 
+                edgeToType[adjacentIndex] = connection.getLine();
+
                 //Adding adjacentIndex to visited nodes
                 nodesVisited.add(graph.getStation(adjacentIndex));
 
 
-
-                if (distTo[adjacentIndex] > (distTo[v] + connection.getWeight())) {
+                if (distTo[adjacentIndex] > (distTo[v] + connection.getWeight() + getTransferPenalty(v, adjacentIndex))) {
                     //Setting new dist value
                     distTo[adjacentIndex] = (distTo[v] + connection.getWeight());
                     //Setting self to be the new fasest route.
@@ -66,8 +74,33 @@ public class DijkstraShortestPath extends AbstractPathSearch {
         pathTo(endIndex);
     }
 
+
+    public int getTransferPenalty(int from, int to) {
+
+        Line previousLine = edgeToType[from];
+        Line nextLine = graph.getConnection(from, to).getLine();
+
+        //Returning 0 if no previous line
+        if(previousLine == null) {
+            return 0;
+        }
+
+
+        if (previousLine.getType().equals("metro") && nextLine.getType().equals("metro")) {
+            return METRO_METRO_PENALTY;
+        } else if ((previousLine.getType().equals("bus") && nextLine.getType().equals("metro")) ||
+                (previousLine.getType().equals("metro") && nextLine.getType().equals("bus"))) {
+            // Either from bus -> metro or metro -> bus;
+            return METRO_BUS_PENALTY;
+        }
+        return 0;
+    }
+
+
     @Override
     public boolean hasPathTo(int vertex) {
         return distTo[vertex] < Double.POSITIVE_INFINITY;
     }
+
+
 }
