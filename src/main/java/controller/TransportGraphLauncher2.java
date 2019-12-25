@@ -7,9 +7,9 @@ public class TransportGraphLauncher2 {
 
     public static void main(String[] args) throws ClassNotFoundException {
         String[] redLine = {"red", "metro", "Haven", "Marken", "Steigerplein", "Centrum", "Meridiaan", "Dukdalf", "Oostvaarders"};
-        String[] blueLine = {"blue", "metro", "Trojelaan", "Coltranee Cirkel", "Meridiaan", "Robijnpark", "Violetplantsoen"};
+        String[] blueLine = {"blue", "metro", "Trojelaan", "Coltrane Cirkel", "Meridiaan", "Robijnpark", "Violetplantsoen"};
         String[] purpleLine = {"purple", "metro", "Grote Sluis", "Grootzeil", "Coltrane Cirkel", "Centrum", "Swingstraat"};
-        String[] greenLine = {"green", "metro", "Ymeerdijk", "Trojelaan", "Steigerplein", "Bachgracht", "Swingstraat", "Nobelplein"};
+        String[] greenLine = {"green", "metro", "Ymeerdijk", "Trojelaan", "Steigerplein", "Swingstraat", "Bachgracht", "Nobelplein"};
         String[] yellowLine = {"yellow", "bus", "Ymeerdijk", "Haven", "Nobelplein", "Violetplantsoen", "Oostvaarders", "Grote Sluis", "Ymeerdijk"};
 
 
@@ -40,7 +40,7 @@ public class TransportGraphLauncher2 {
 //        System.out.println(transportGraph);
 
 
-        DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph, "Haven", "Oostvaarders");
+        DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph, "Haven", "Coltrane Cirkel");
         dijk.search();
         System.out.println(dijk);
         dijk.printNodesInVisitedOrder();

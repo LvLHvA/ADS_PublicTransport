@@ -2,6 +2,7 @@ package graphalgorithms;
 
 import model.Connection;
 import model.IndexMinPQ;
+import model.Station;
 import model.TransportGraph;
 
 public class DijkstraShortestPath extends AbstractPathSearch {
@@ -12,7 +13,6 @@ public class DijkstraShortestPath extends AbstractPathSearch {
 
     public DijkstraShortestPath(TransportGraph graph, String start, String end) {
         super(graph, start, end);
-        System.out.println("NofStations: " + graph.getNumberOfStations());
         queue = new IndexMinPQ<>(graph.getNumberOfStations());
         distTo = new double[graph.getNumberOfStations()];
 
@@ -29,35 +29,43 @@ public class DijkstraShortestPath extends AbstractPathSearch {
     @Override
     public void search() {
 
-        while(!queue.isEmpty()) {
-            System.out.println(queue.size());
+        while (!queue.isEmpty()) {
             int v = queue.delMin();
 
             for (Connection connection : getConnectionsForStation(v)) {
 
-
-                //To make sure we get the corret adjacent station and the station itself.
-                int adjecentToIndex = 0;
-                if(connection.getTo().equals(graph.getStation(v))){
-                    adjecentToIndex = graph.getIndexOfStationByName(connection.getFrom().getStationName());
+                //To make sure we get the correct adjacent station instead of the station itself.
+                int selfIndex;
+                int adjacentIndex;
+                if (connection.getTo().equals(graph.getStation(v))) {
+                    adjacentIndex = graph.getIndexOfStationByName(connection.getFrom().getStationName());
+                    selfIndex = graph.getIndexOfStationByName(connection.getTo().getStationName());
                 } else {
-                    adjecentToIndex = graph.getIndexOfStationByName(connection.getTo().getStationName());
+                    adjacentIndex = graph.getIndexOfStationByName(connection.getTo().getStationName());
+                    selfIndex = graph.getIndexOfStationByName(connection.getFrom().getStationName());
                 }
 
-                if(distTo[adjecentToIndex] > distTo[v] + connection.getWeight()){
-                    distTo[adjecentToIndex] = distTo[v] + connection.getWeight();
-                    edgeTo[adjecentToIndex] = adjecentToIndex;
+                //Adding adjacentIndex to visited nodes
+                nodesVisited.add(graph.getStation(adjacentIndex));
 
-                    if(queue.contains(adjecentToIndex)) {
-                        queue.changeKey(adjecentToIndex, distTo[adjecentToIndex]);
+
+                if (distTo[adjacentIndex] > (distTo[v] + connection.getWeight())) {
+                    //Setting new dist value
+                    distTo[adjacentIndex] = (distTo[v] + connection.getWeight());
+                    //Setting self to be the new fasest route.
+                    edgeTo[adjacentIndex] = selfIndex;
+
+                    if (queue.contains(adjacentIndex)) {
+                        queue.changeKey(adjacentIndex, distTo[adjacentIndex]);
                     } else {
-                        queue.insert(adjecentToIndex, distTo[adjecentToIndex]);
+                        queue.insert(adjacentIndex, distTo[adjacentIndex]);
                     }
                 }
 
             }
         }
 
+        pathTo(endIndex);
     }
 
     @Override
