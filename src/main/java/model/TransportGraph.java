@@ -103,12 +103,15 @@ public class TransportGraph {
         StringBuilder resultString = new StringBuilder();
         resultString.append(String.format("Graph with %d vertices and %d edges: \n", numberOfStations, numberOfConnections));
         for (int indexVertex = 0; indexVertex < numberOfStations; indexVertex++) {
-            resultString.append(stationList.get(indexVertex) + " " + stationList.get(indexVertex).getLocation() + ": ");
+//            resultString.append(stationList.get(indexVertex) + " " + stationList.get(indexVertex).getLocation() + ": ");
+            resultString.append(stationList.get(indexVertex) + ": ");
             int loopsize = adjacencyLists[indexVertex].size() - 1;
             for (int indexAdjacent = 0; indexAdjacent < loopsize; indexAdjacent++) {
-                resultString.append("(" + stationList.get(adjacencyLists[indexVertex].get(indexAdjacent)).getStationName() + ")-");
+                resultString.append(stationList.get(adjacencyLists[indexVertex].get(indexAdjacent)).getStationName() + "-");
+//                resultString.append("(" + stationList.get(adjacencyLists[indexVertex].get(indexAdjacent)).getStationName() + ")-");
             }
-            resultString.append("(" + stationList.get(adjacencyLists[indexVertex].get(loopsize)).getStationName() + ")\n");
+            resultString.append(stationList.get(adjacencyLists[indexVertex].get(loopsize)).getStationName() + "\n");
+//            resultString.append("(" + stationList.get(adjacencyLists[indexVertex].get(loopsize)).getStationName() + ")\n");
         }
         return resultString.toString();
     }

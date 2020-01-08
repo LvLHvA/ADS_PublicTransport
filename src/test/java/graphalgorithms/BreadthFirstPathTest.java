@@ -16,8 +16,8 @@ public class BreadthFirstPathTest extends SearchSetup {
         String path = "[A, G, J]";
         assertTrue(bfs.toString().contains(path));
 
-        String order = "[A, B, E, G, C, F, D, I, H, J]";
-        assertEquals(bfs.nodesVisited.toString(), order);
+        String order = "[A, B, E, G, C, F, H, D, J]";
+        assertEquals(order, bfs.nodesVisited.toString());
 
         assertEquals(bfs.transfers, 1);
 
