@@ -74,14 +74,16 @@ public class TransportGraphLauncher2 {
 //        System.out.println();
 //
 //
-        DepthFirstSearch dfsTest = new DepthFirstSearch(transportGraph, "Haven", "Coltrane Cirkel");
-        dfsTest.search();
-        System.out.println(dfsTest);
-        dfsTest.printNodesInVisitedOrder();
-        System.out.println();
+//        DepthFirstSearch dfsTest = new DepthFirstSearch(transportGraph, "Haven", "Coltrane Cirkel");
+//        dfsTest.search();
+//        System.out.println(dfsTest);
+//        dfsTest.printNodesInVisitedOrder();
+//        System.out.println();
 
 
-        // overview //
+
+
+       //  Overview //
         List<DijkstraShortestPath> dijkstra = new ArrayList<>();
 
         for (Station station1 : transportGraph.getStationList()) {
@@ -100,59 +102,36 @@ public class TransportGraphLauncher2 {
 
         Collections.sort(dijkstra);
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(dijkstra.get(i));
+
+
+//        for (DijkstraShortestPath dijkstraShortestPath : dijkstra) {
+//            System.out.println(dijkstraShortestPath);
+//        }
+        
+        List<A_Star> a_star = new ArrayList<>();
+
+        for (Station station1 : transportGraph.getStationList()) {
+            for (Station station2 : transportGraph.getStationList()) {
+                if(station1.equals(station2)) {
+                    continue;
+                }
+                A_Star aStar = new A_Star(transportGraph,
+                        station1.getStationName(),
+                        station2.getStationName());
+                aStar.search();
+                a_star.add(aStar);
+
+            }
         }
 
-        System.out.println();
+        Collections.sort(a_star);
 
 
-        // Overview //
-//        List<DijkstraShortestPath> dijkstra = new ArrayList<>();
-//
-//        for (Station station1 : transportGraph.getStationList()) {
-//            for (Station station2 : transportGraph.getStationList()) {
-//                if(station1.equals(station2)) {
-//                    continue;
-//                }
-//                DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph,
-//                        station1.getStationName(),
-//                        station2.getStationName());
-//                dijk.search();
-//                dijkstra.add(dijk);
-//
-//            }
-//        }
-//
-//        Collections.sort(dijkstra);
-//
-//        for (int i = 0; i < 10; i++) {
-//            System.out.println(dijkstra.get(i));
-//        }
-
-//        System.out.println();
-//
-//        List<A_Star> a_star = new ArrayList<>();
-//
-//        for (Station station1 : transportGraph.getStationList()) {
-//            for (Station station2 : transportGraph.getStationList()) {
-//                if(station1.equals(station2)) {
-//                    continue;
-//                }
-//                A_Star aStar = new A_Star(transportGraph,
-//                        station1.getStationName(),
-//                        station2.getStationName());
-//                aStar.search();
-//                a_star.add(aStar);
-//
-//            }
-//        }
-//
-//        Collections.sort(a_star);
-//
-//        for (int i = 0; i < 10; i++) {
-//            System.out.println(a_star.get(i));
-//        }
+        System.out.printf("%-100s%-15s%-100s%-15s\n", "Dijkstra","Nodes Visited", "A_Star", "Nodes Visited");
+        for (int i = 0; i < 50; i++) {
+            System.out.printf("%-100s%-15d", dijkstra.get(i), dijkstra.get(i).getNodesVisitedSize());
+            System.out.printf("%-100s%-15d\n", a_star.get(i), a_star.get(i).getNodesVisitedSize());
+        }
 
 
 

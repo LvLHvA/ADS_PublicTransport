@@ -129,4 +129,8 @@ public abstract class AbstractPathSearch {
         return resultString.toString();
     }
 
+
+    public int getNodesVisitedSize() {
+        return nodesVisited.size();
+    }
 }

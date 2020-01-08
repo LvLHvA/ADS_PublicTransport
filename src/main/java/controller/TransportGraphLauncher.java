@@ -32,8 +32,7 @@ public class TransportGraphLauncher {
 //        bfsTest.printNodesInVisitedOrder();
 //        System.out.println();
 
-        // TODO: 16-12-19 A.5
-
+        // TODO: 08-01-20 A.5 SKIP IT - Nico Tromp
 
 //        TreeMap<Station, List<Station>> visited = new TreeMap();
 //
