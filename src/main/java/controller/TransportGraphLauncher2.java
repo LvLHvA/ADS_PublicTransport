@@ -80,10 +80,30 @@ public class TransportGraphLauncher2 {
         dfsTest.printNodesInVisitedOrder();
         System.out.println();
 
-        A_Star aStar = new A_Star(transportGraph, "Haven", "Coltrane Cirkel");
-        aStar.search();
-        System.out.println(aStar);
-        aStar.printNodesInVisitedOrder();
+
+        // overview //
+        List<DijkstraShortestPath> dijkstra = new ArrayList<>();
+
+        for (Station station1 : transportGraph.getStationList()) {
+            for (Station station2 : transportGraph.getStationList()) {
+                if(station1.equals(station2)) {
+                    continue;
+                }
+                DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph,
+                        station1.getStationName(),
+                        station2.getStationName());
+                dijk.search();
+                dijkstra.add(dijk);
+
+            }
+        }
+
+        Collections.sort(dijkstra);
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println(dijkstra.get(i));
+        }
+
         System.out.println();
 
 
