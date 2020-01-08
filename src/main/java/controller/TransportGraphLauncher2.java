@@ -107,7 +107,7 @@ public class TransportGraphLauncher2 {
 //        for (DijkstraShortestPath dijkstraShortestPath : dijkstra) {
 //            System.out.println(dijkstraShortestPath);
 //        }
-        
+
         List<A_Star> a_star = new ArrayList<>();
 
         for (Station station1 : transportGraph.getStationList()) {
