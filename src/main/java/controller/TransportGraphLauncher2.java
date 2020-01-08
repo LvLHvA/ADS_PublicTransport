@@ -1,6 +1,7 @@
 package controller;
 
 import graphalgorithms.A_Star;
+import graphalgorithms.DepthFirstSearch;
 import graphalgorithms.DijkstraShortestPath;
 import model.Station;
 import model.TransportGraph;
@@ -73,60 +74,65 @@ public class TransportGraphLauncher2 {
 //        System.out.println();
 //
 //
-//        //Something doesnt work here...
-//        DepthFirstSearch dfsTest = new DepthFirstSearch(transportGraph, "Haven", "Coltrane Cirkel");
-//        bfsTest.search();
-//        System.out.println(dfsTest);
-//        bfsTest.printNodesInVisitedOrder();
-//        System.out.println();
+        DepthFirstSearch dfsTest = new DepthFirstSearch(transportGraph, "Haven", "Coltrane Cirkel");
+        dfsTest.search();
+        System.out.println(dfsTest);
+        dfsTest.printNodesInVisitedOrder();
+        System.out.println();
+
+        A_Star aStar = new A_Star(transportGraph, "Haven", "Coltrane Cirkel");
+        aStar.search();
+        System.out.println(aStar);
+        aStar.printNodesInVisitedOrder();
+        System.out.println();
 
 
         // Overview //
-        List<DijkstraShortestPath> dijkstra = new ArrayList<>();
+//        List<DijkstraShortestPath> dijkstra = new ArrayList<>();
+//
+//        for (Station station1 : transportGraph.getStationList()) {
+//            for (Station station2 : transportGraph.getStationList()) {
+//                if(station1.equals(station2)) {
+//                    continue;
+//                }
+//                DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph,
+//                        station1.getStationName(),
+//                        station2.getStationName());
+//                dijk.search();
+//                dijkstra.add(dijk);
+//
+//            }
+//        }
+//
+//        Collections.sort(dijkstra);
+//
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println(dijkstra.get(i));
+//        }
 
-        for (Station station1 : transportGraph.getStationList()) {
-            for (Station station2 : transportGraph.getStationList()) {
-                if(station1.equals(station2)) {
-                    continue;
-                }
-                DijkstraShortestPath dijk = new DijkstraShortestPath(transportGraph,
-                        station1.getStationName(),
-                        station2.getStationName());
-                dijk.search();
-                dijkstra.add(dijk);
-
-            }
-        }
-
-        Collections.sort(dijkstra);
-
-        for (int i = 0; i < 10; i++) {
-            System.out.println(dijkstra.get(i));
-        }
-
-        System.out.println();
-
-        List<A_Star> a_star = new ArrayList<>();
-
-        for (Station station1 : transportGraph.getStationList()) {
-            for (Station station2 : transportGraph.getStationList()) {
-                if(station1.equals(station2)) {
-                    continue;
-                }
-                A_Star aStar = new A_Star(transportGraph,
-                        station1.getStationName(),
-                        station2.getStationName());
-                aStar.search();
-                a_star.add(aStar);
-
-            }
-        }
-
-        Collections.sort(a_star);
-
-        for (int i = 0; i < 10; i++) {
-            System.out.println(a_star.get(i));
-        }
+//        System.out.println();
+//
+//        List<A_Star> a_star = new ArrayList<>();
+//
+//        for (Station station1 : transportGraph.getStationList()) {
+//            for (Station station2 : transportGraph.getStationList()) {
+//                if(station1.equals(station2)) {
+//                    continue;
+//                }
+//                A_Star aStar = new A_Star(transportGraph,
+//                        station1.getStationName(),
+//                        station2.getStationName());
+//                aStar.search();
+//                a_star.add(aStar);
+//
+//            }
+//        }
+//
+//        Collections.sort(a_star);
+//
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println(a_star.get(i));
+//        }
 
 
 

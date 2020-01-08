@@ -36,42 +36,49 @@ public class DijkstraShortestPath extends AbstractPathSearch implements Comparab
     @Override
     public void search() {
 
+
         while (!queue.isEmpty()) {
             int v = queue.delMin();
 
-            for (Connection connection : getConnectionsForStation(v)) {
+            if (v == endIndex) {
 
-                //To make sure we get the correct adjacent station instead of the station itself.
-                int adjacentIndex;
-                if (connection.getTo().equals(graph.getStation(v))) {
-                    adjacentIndex = graph.getIndexOfStationByName(connection.getFrom().getStationName());
-                } else {
-                    adjacentIndex = graph.getIndexOfStationByName(connection.getTo().getStationName());
-                }
+                distTo[v] = 0;
+                nodesVisited.add(graph.getStation(v));
+                pathTo(endIndex);
+            } else {
 
-                edgeToType[adjacentIndex] = connection.getLine();
+                for (Connection connection : getConnectionsForStation(v)) {
 
-                //Adding adjacentIndex to visited nodes
-                nodesVisited.add(graph.getStation(adjacentIndex));
-
-
-                if (distTo[adjacentIndex] > (distTo[v] + connection.getWeight() + getTransferPenalty(v, adjacentIndex))) {
-                    //Setting new dist value
-                    distTo[adjacentIndex] = (distTo[v] + connection.getWeight());
-                    //Setting self to be the new fasest route.
-                    edgeTo[adjacentIndex] = v;
-
-                    if (queue.contains(adjacentIndex)) {
-                        queue.changeKey(adjacentIndex, distTo[adjacentIndex]);
+                    //To make sure we get the correct adjacent station instead of the station itself.
+                    int adjacentIndex;
+                    if (connection.getTo().equals(graph.getStation(v))) {
+                        adjacentIndex = graph.getIndexOfStationByName(connection.getFrom().getStationName());
                     } else {
-                        queue.insert(adjacentIndex, distTo[adjacentIndex]);
+                        adjacentIndex = graph.getIndexOfStationByName(connection.getTo().getStationName());
                     }
-                }
 
+                    edgeToType[adjacentIndex] = connection.getLine();
+
+                    //Adding adjacentIndex to visited nodes
+                    nodesVisited.add(graph.getStation(adjacentIndex));
+
+
+                    if (distTo[adjacentIndex] > (distTo[v] + connection.getWeight() + getTransferPenalty(v, adjacentIndex))) {
+                        //Setting new dist value
+                        distTo[adjacentIndex] = (distTo[v] + connection.getWeight());
+                        //Setting self to be the new fasest route.
+                        edgeTo[adjacentIndex] = v;
+
+                        if (queue.contains(adjacentIndex)) {
+                            queue.changeKey(adjacentIndex, distTo[adjacentIndex]);
+                        } else {
+                            queue.insert(adjacentIndex, distTo[adjacentIndex]);
+                        }
+                    }
+
+                }
             }
         }
-
-        pathTo(endIndex);
     }
 
 
@@ -97,14 +104,13 @@ public class DijkstraShortestPath extends AbstractPathSearch implements Comparab
     }
 
 
-    @Override
-    public boolean hasPathTo(int vertex) {
-        return distTo[vertex] < Double.POSITIVE_INFINITY;
+    public boolean hasPathTo(int v) {
+        return distTo[v] < Double.POSITIVE_INFINITY;
     }
 
 
     @Override
     public int compareTo(DijkstraShortestPath other) {
-        return Integer.compare(this.nodesInPath.size() , other.nodesInPath.size());
+        return Integer.compare(this.nodesInPath.size(), other.nodesInPath.size());
     }
 }
